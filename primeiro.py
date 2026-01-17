@@ -16,7 +16,7 @@ peso = random.uniform(-1, 1)
 bias = random.uniform(-1, 1)
 taxa_aprendizagem = 0.01 #Quanto que vai mudar depois de cada tentativa, quanto menor mais demora mais menos explode ;)
 
-for i in range(500):
+for i in range(1000):
     for x, y in dados:
         chute = peso * x + bias
         
@@ -28,3 +28,8 @@ for i in range(500):
         print(f"Número: {i}\nPesos: {peso}\nBias: {bias}\nErro: {erro}")
         print(f"Chute: {chute}\nValor Real: {y}")
         print("-=" * 10)
+
+while True:
+    numero_pessoa = int(input("Digite o seu X: "))
+    print(f"-=" * 20)
+    print(f"X: {numero_pessoa}\nResposta: {peso * numero_pessoa + bias}")
