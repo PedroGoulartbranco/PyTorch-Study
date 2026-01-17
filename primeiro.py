@@ -27,9 +27,16 @@ for i in range(1000):
     if i % 10 == 0:
         print(f"Número: {i}\nPesos: {peso}\nBias: {bias}\nErro: {erro}")
         print(f"Chute: {chute}\nValor Real: {y}")
-        print("-=" * 10)
+        print("-=" * 20)
 
+
+contador = 0
 while True:
     numero_pessoa = int(input("Digite o seu X: "))
-    print(f"-=" * 20)
     print(f"X: {numero_pessoa}\nResposta: {peso * numero_pessoa + bias}")
+    if contador % 5 == 0:
+        sair = str(input("Deseja sair? [S/N] ")).upper()
+        if (sair == "S"):
+            break
+    print(f"-=" * 20)
+    contador += 1
