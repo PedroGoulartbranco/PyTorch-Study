@@ -5,17 +5,18 @@ import random
 #Dados = (numero, [positivo?, grande?])
 
 dados = [
-    (-5, [0, 0]),
-    (-3, [0, 0]),
-    (-1, [0, 0]),
-    (1, [1, 0]),
-    (2, [1, 0]),
-    (4, [1, 0]),
-    (5, [1, 0]),
-    (7, [1, 0]),
-    (9, [1, 0]),
-    (10, [1, 1]),
-    (12, [1, 1])
+    (-5, [0, 0], 0),
+    (-3, [0, 0], 0),
+    (-1, [0, 0], 0),
+    (1, [1, 0], 0),
+    (2, [1, 0], 0),
+    (4, [1, 0], 0),
+    (5, [1, 0], 0),
+    (7, [1, 0], 0),
+    (9, [1, 0], 0),
+    (10, [1, 1], 1),
+    (12, [1, 1], 1),
+    (15, [1, 1], 1)
 ]
 
 peso_1 = random.uniform(-1, 1)
@@ -25,10 +26,9 @@ peso_2 = random.uniform(-1, 1)
 bias_2 = random.uniform(-1, 1)
 
 peso_3_1 = random.uniform(-1, 1) #Peso 1 do terceiro, serve para peso dos positivos
-bias_3_1 = random.uniform(-1, 1) #Bias 1 do terceiro, serve para ser o bias dos positivos
+peso_3_2 = random.uniform(-1, 1) #Peso 2 do terceiro, serve para peso dos grandes
+bias_3 = random.uniform(-1, 1)
 
-peso_3_1 = random.uniform(-1, 1) #Peso 2 do terceiro, serve para peso dos grandes
-bias_3_1 = random.uniform(-1, 1) #Bias 2 do terceiro, serve para ser o bias dos grandes
 
 taxa_aprendizado = 0.01
 
@@ -38,7 +38,7 @@ def sigmoid(x):
 
 #Verificar se é positivo
 for i in range(2500):
-    for numero, valores in dados:
+    for numero, valores, resultado in dados:
         positivo = valores[0]
         chute = numero * peso_1 + bias_1
         probabilidade = sigmoid(chute)
@@ -49,7 +49,7 @@ for i in range(2500):
 
 #Verificar se é grande
 for i in range(2500):
-    for numero, valores in dados:
+    for numero, valores, resultado in dados:
         grande = valores[1]
         chute = numero * peso_2 + bias_2
         probabilidade = sigmoid(chute)
@@ -60,12 +60,27 @@ for i in range(2500):
 
 #Verificar se é Grande e Positivo
 for i in range(4000):
-    for numero, valores in dados:
+    for numero, valores, resultado in dados:
         positivo = numero * peso_1 + bias_1
         positivo = sigmoid(positivo)
 
         grande = numero * peso_2 + bias_2
         grande = sigmoid(grande)
 
-        chute = numero * peso_3 + bias_3
+        chute = (positivo * peso_3_1) + (grande * peso_3_2) + bias_3
+        probabilidade = sigmoid(chute)
 
+        erro = resultado - probabilidade
+        
+        peso_3_1 += erro * positivo * taxa_aprendizado
+        peso_3_2 += erro * grande * taxa_aprendizado
+        bias_3 += erro * taxa_aprendizado
+
+
+def verificar_grande_pequeno(n):
+    positivo = numero * peso_1 + bias_1
+    positivo = sigmoid(positivo)
+
+    grande = numero * peso_2 + bias_2
+    grande = sigmoid(grande)
+    chute = (positivo * peso_3_1) + (grande * peso_3_2) + bias_3
