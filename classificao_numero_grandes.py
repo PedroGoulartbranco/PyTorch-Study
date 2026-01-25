@@ -34,8 +34,8 @@ for i in range(2000):
         pesos += erro * numero * taxa_aprendizado
         bias += erro * taxa_aprendizado
     
-    if (i % 10 == 0):
-        print(f"Número: {numero}\nChute: {probabilidade * 100:.1f}%")
+        if (i % 10 == 0):
+            print(f"Número: {numero}\nChute: {probabilidade * 100:.1f}%")
 
 def pequeno_grande(numero):
     formula = pesos * numero + bias
