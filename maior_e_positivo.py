@@ -78,10 +78,10 @@ for i in range(4000):
 
 
 def verificar_grande_pequeno(n):
-    positivo = numero * peso_1 + bias_1
+    positivo = n * peso_1 + bias_1
     positivo = sigmoid(positivo)
 
-    grande = numero * peso_2 + bias_2
+    grande = n * peso_2 + bias_2
     grande = sigmoid(grande)
     chute = (positivo * peso_3_1) + (grande * peso_3_2) + bias_3
     probabilidade = sigmoid(chute)
