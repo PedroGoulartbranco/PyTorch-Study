@@ -84,3 +84,15 @@ def verificar_grande_pequeno(n):
     grande = numero * peso_2 + bias_2
     grande = sigmoid(grande)
     chute = (positivo * peso_3_1) + (grande * peso_3_2) + bias_3
+    probabilidade = sigmoid(chute)
+
+    return probabilidade
+
+while True:
+    numero = int(input("Digite um número: "))
+    chance_grande_postivo = verificar_grande_pequeno(numero)
+    if chance_grande_postivo >= 0.5:
+        resultado = 1
+    else:
+        resultado = 0
+    print(f"O número {numero} é positivo e grande? {resultado}\nChance de ser: {chance_grande_postivo * 100:.2f}%")
